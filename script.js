@@ -3,6 +3,10 @@ const textarea = markdown;
 // const fileInput = fileInput;
 let lightMode = false;
 
+/**
+ * @param {string} id
+ * @returns {void}
+ */
 function toggleDropdown(id) {
     const dropdown = document.getElementById(id);
     dropdown.classList.toggle('show');
@@ -15,6 +19,10 @@ window.onclick = function(event) {
     }
 }
 
+/**
+ * @param {'load' | 'save' | 'saveAs'} action
+ * @returns {void}
+ */
 function handleMenuChange(action) {
     if (action === 'load') {
         fileInput.click();
@@ -25,16 +33,22 @@ function handleMenuChange(action) {
     }
 }
 
+/**
+ * @returns {void}
+ */
 function loadMarkdown() {
     const file = fileInput.files[0];
     const reader = new FileReader();
     reader.onload = function(e) {
-        textarea.value = e.target.result;
+        textarea.value = /** @type {string} */ (e.target.result);
         updatePreview();
     }
     reader.readAsText(file);
 }
 
+/**
+ * @returns {void}
+ */
 function saveMarkdown() {
     const blob = new Blob([textarea.value], { type: 'text/markdown' });
     const url = URL.createObjectURL(blob);
@@ -47,6 +61,9 @@ function saveMarkdown() {
     URL.revokeObjectURL(url);
 }
 
+/**
+ * @returns {void}
+ */
 function saveMarkdownAs() {
     const fileName = prompt('Enter file name', 'document.md');
     if (fileName) {
@@ -62,6 +79,9 @@ function saveMarkdownAs() {
     }
 }
 
+/**
+ * @returns {void}
+ */
 function updatePreview() {
     const markdownText = textarea.value;
     const html = marked(markdownText, {
@@ -74,6 +94,9 @@ function updatePreview() {
     renderWarnings();
 }
 
+/**
+ * @returns {void}
+ */
 function toggleLightMode() {
     lightMode = !lightMode;
     document.body.classList.toggle('light-mode', lightMode);
@@ -83,11 +106,19 @@ function toggleLightMode() {
     line_numbers.classList.toggle('light-mode', lightMode);
 }
 
+/**
+ * @param {number} level
+ * @returns {void}
+ */
 function insertHeader(level) {
     const header = '#'.repeat(level) + ' ';
     insertTextAtCursor(header);
 }
 
+/**
+ * @param {'bold' | 'italic'} type
+ * @returns {void}
+ */
 function insertEmphasis(type) {
     const selectedText = textarea.value.substring(textarea.selectionStart, textarea.selectionEnd);
     const wrapper = type === 'bold' ? '**' : '*';
@@ -95,11 +126,18 @@ function insertEmphasis(type) {
     insertTextAtCursor(newText);
 }
 
+/**
+ * @param {'unordered' | 'ordered'} type
+ * @returns {void}
+ */
 function insertList(type) {
     const listItem = type === 'unordered' ? '- ' : '1. ';
     insertTextAtCursor(listItem);
 }
 
+/**
+ * @returns {void}
+ */
 function insertLink() {
     const url = prompt('Enter URL:');
     const text = prompt('Enter link text:');
@@ -109,6 +147,9 @@ function insertLink() {
     }
 }
 
+/**
+ * @returns {void}
+ */
 function insertImage() {
     const url = prompt('Enter image URL:');
     const alt = prompt('Enter alt text:');
@@ -118,6 +159,9 @@ function insertImage() {
     }
 }
 
+/**
+ * @returns {void}
+ */
 function insertCode() {
     const code = prompt('Enter code:');
     const language = prompt('Enter language (optional):');
@@ -127,6 +171,9 @@ function insertCode() {
     }
 }
 
+/**
+ * @returns {void}
+ */
 function insertWarning() {
     const warningText = prompt('Enter warning text:');
     if (warningText) {
@@ -135,12 +182,18 @@ function insertWarning() {
     }
 }
 
+/**
+ * @returns {void}
+ */
 function insertStrikethrough() {
     const selectedText = textarea.value.substring(textarea.selectionStart, textarea.selectionEnd);
     const newText = `~~${selectedText.length > 0 ? selectedText : "Strikethrough Text"}~~`;
     insertTextAtCursor(newText);
 }
 
+/**
+ * @returns {void}
+ */
 function insertTaskList() {
     const taskText = prompt("Enter task text:");
     if (taskText) {
@@ -149,11 +202,17 @@ function insertTaskList() {
     }
 }
 
+/**
+ * @returns {void}
+ */
 function insertTOC() {
     const newText = `[TOC]`;
     insertTextAtCursor(newText);
 }
 
+/**
+ * @returns {void}
+ */
 function insertCustomContainer() {
     const containerType = prompt("Enter container type (e.g., tip, warning):");
     const containerText = prompt(`Enter ${containerType} text:`);
@@ -163,6 +222,9 @@ function insertCustomContainer() {
     }
 }
 
+/**
+ * @returns {void}
+ */
 function insertSpoiler() {
     const spoilerText = prompt("Enter spoiler text:");
     if (spoilerText) {
@@ -171,6 +233,9 @@ function insertSpoiler() {
     }
 }
 
+/**
+ * @returns {void}
+ */
 function insertEmbedContent() {
     const embedURL = prompt("Enter embed URL:");
     if (embedURL) {
@@ -179,6 +244,10 @@ function insertEmbedContent() {
     }
 }
 
+/**
+ * @param {string} text
+ * @returns {void}
+ */
 function insertTextAtCursor(text) {
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
@@ -190,6 +259,9 @@ function insertTextAtCursor(text) {
     updateLineNumbers();
 }
 
+/**
+ * @returns {void}
+ */
 function updateLineNumbers() {
     const lines = textarea.value.split('\n');
     let lineNumbersHtml = '';
@@ -199,7 +271,11 @@ function updateLineNumbers() {
     line_numbers.innerText = lineNumbersHtml;
 }
 
+/**
+ * @returns {void}
+ */
 function renderWarnings() {
+    /** @type {NodeListOf<HTMLDivElement>} */
     const warnings = document.querySelectorAll('.warning');
     warnings.forEach(warning => {
         warning.style.backgroundColor = lightMode ? '#f8d7da' : '#3d3d3d';
