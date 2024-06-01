@@ -1,6 +1,6 @@
-const textarea = document.getElementById('markdown');
-const preview = document.getElementById('preview');
-const fileInput = document.getElementById('fileInput');
+const textarea = markdown;
+// const preview = preview;
+// const fileInput = fileInput;
 let lightMode = false;
 
 function toggleDropdown(id) {
@@ -10,8 +10,8 @@ function toggleDropdown(id) {
 
 window.onclick = function(event) {
     if (!event.target.matches('#fileMenu') && !event.target.matches('#viewMenu')) {
-        document.getElementById('menuOptions').classList.remove('show');
-        document.getElementById('viewOptions').classList.remove('show');
+        menuOptions.classList.remove('show');
+        viewOptions.classList.remove('show');
     }
 }
 
@@ -77,10 +77,10 @@ function updatePreview() {
 function toggleLightMode() {
     lightMode = !lightMode;
     document.body.classList.toggle('light-mode', lightMode);
-    document.getElementById('menu').classList.toggle('light-mode', lightMode);
-    document.getElementById('tool_bar').classList.toggle('light-mode', lightMode);
-    document.getElementById('markdown').classList.toggle('light-mode', lightMode);
-    document.getElementById('line_numbers').classList.toggle('light-mode', lightMode);
+    menu.classList.toggle('light-mode', lightMode);
+    tool_bar.classList.toggle('light-mode', lightMode);
+    markdown.classList.toggle('light-mode', lightMode);
+    line_numbers.classList.toggle('light-mode', lightMode);
 }
 
 function insertHeader(level) {
@@ -196,7 +196,7 @@ function updateLineNumbers() {
     for (let i = 1; i <= lines.length; i++) {
         lineNumbersHtml += i + '\n';
     }
-    document.getElementById('line_numbers').innerText = lineNumbersHtml;
+    line_numbers.innerText = lineNumbersHtml;
 }
 
 function renderWarnings() {
