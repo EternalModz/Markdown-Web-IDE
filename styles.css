@@ -70,17 +70,17 @@ body.light-mode {
     background-color: #555;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
 }
-#toolbar {
+#tool_bar {
     background-color: #333;
     padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-#toolbar.light-mode {
+#tool_bar.light-mode {
     background-color: #e0e0e0;
 }
-#toolbar button {
+#tool_bar button {
     background: none;
     border: none;
     color: #d4d4d4;
@@ -89,10 +89,10 @@ body.light-mode {
     transition: color 0.3s ease;
     position: relative;
 }
-#toolbar button:hover {
+#tool_bar button:hover {
     color: #fff;
 }
-#toolbar button span {
+#tool_bar button span {
     visibility: hidden;
     width: 120px;
     background-color: #555;
@@ -108,7 +108,7 @@ body.light-mode {
     opacity: 0;
     transition: opacity 0.3s;
 }
-#toolbar button:hover span {
+#tool_bar button:hover span {
     visibility: visible;
     opacity: 1;
 }
@@ -150,7 +150,7 @@ body.light-mode #markdown {
     background-color: #ffffff;
     color: #000000;
 }
-#line-numbers {
+#line_numbers {
     position: absolute;
     top: 0;
     left: 0;
@@ -163,7 +163,7 @@ body.light-mode #markdown {
     font-family: 'Consolas', 'Courier New', monospace;
     font-size: 16px;
 }
-body.light-mode #line-numbers {
+body.light-mode #line_numbers {
     background-color: #ffffff;
     color: #858585;
 }

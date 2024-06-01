@@ -78,9 +78,9 @@ function toggleLightMode() {
     lightMode = !lightMode;
     document.body.classList.toggle('light-mode', lightMode);
     document.getElementById('menu').classList.toggle('light-mode', lightMode);
-    document.getElementById('toolbar').classList.toggle('light-mode', lightMode);
+    document.getElementById('tool_bar').classList.toggle('light-mode', lightMode);
     document.getElementById('markdown').classList.toggle('light-mode', lightMode);
-    document.getElementById('line-numbers').classList.toggle('light-mode', lightMode);
+    document.getElementById('line_numbers').classList.toggle('light-mode', lightMode);
 }
 
 function insertHeader(level) {
@@ -196,7 +196,7 @@ function updateLineNumbers() {
     for (let i = 1; i <= lines.length; i++) {
         lineNumbersHtml += i + '\n';
     }
-    document.getElementById('line-numbers').innerText = lineNumbersHtml;
+    document.getElementById('line_numbers').innerText = lineNumbersHtml;
 }
 
 function renderWarnings() {
